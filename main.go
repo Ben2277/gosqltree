@@ -49,7 +49,7 @@ func init() {
 	flag.BoolVar(&pretty, "pretty", false, "Print pretty JSON.")
 	flag.BoolVar(&id, "id", false, "Print SQL ID.")
 	flag.BoolVar(&element, "element", false, "Print SQL element.")
-	flag.BoolVar(&origin, "tree", false, "Print SQL tree.")
+	flag.BoolVar(&origin, "origin", false, "Print the original SQL syntax tree.")
 
 	// 改变默认的 Usage
 	flag.Usage = usage
