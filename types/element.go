@@ -1,7 +1,6 @@
 package types
 
 import (
-	"fmt"
 	"gosqltree/utils"
 
 	"github.com/pingcap/parser/ast"
@@ -23,7 +22,7 @@ type SQLElement struct {
 
 // Enter Visitor接口的Enter方法
 func (se *SQLElement) Enter(in ast.Node) (out ast.Node, skipChildren bool) {
-	fmt.Printf("%T\n", in)
+	// fmt.Printf("%T\n", in)
 	se.ParseSQLElement(in)
 
 	return in, false

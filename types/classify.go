@@ -262,37 +262,37 @@ func classifyColDataType(cdt byte) (string, bool) {
 func classifyColumnOptionType(aco *ast.ColumnOption) (string, bool) {
 	switch aco.Tp {
 	case ast.ColumnOptionAutoIncrement:
-		return "hasAutoIncrement", true
+		return "AutoIncrement", true
 	case ast.ColumnOptionPrimaryKey:
-		return "hasPrimaryKey", true
+		return "PrimaryKey", true
 	case ast.ColumnOptionUniqKey:
-		return "hasUniqKey", true
+		return "UniqueKey", true
 	case ast.ColumnOptionNotNull:
-		return "hasNotNull", true
+		return "NotNull", true
 	case ast.ColumnOptionNull:
-		return "hasNotNull", false
+		return "NotNull", false
 	case ast.ColumnOptionDefaultValue:
-		return "hasDefaultValue", true
+		return "DefaultValue", true
 	case ast.ColumnOptionComment:
-		return "hasComment", true
+		return "Comment", true
 	case ast.ColumnOptionOnUpdate:
-		return "hasOnUpdate", true
+		return "OnUpdate", true
 	case ast.ColumnOptionFulltext:
-		return "hasFulltext", true
+		return "Fulltext", true
 	case ast.ColumnOptionGenerated:
-		return "hasGenerated", true
+		return "Generated", true
 	case ast.ColumnOptionReference:
-		return "hasReference", true
+		return "Reference", true
 	case ast.ColumnOptionCollate:
-		return "hasCollate", true
+		return "Collate", true
 	case ast.ColumnOptionCheck:
-		return "hasCheck", true
+		return "Check", true
 	case ast.ColumnOptionColumnFormat:
-		return "hasColumnFormat", true
+		return "ColumnFormat", true
 	case ast.ColumnOptionStorage:
-		return "hasStorage", true
+		return "Storage", true
 	case ast.ColumnOptionAutoRandom:
-		return "hasAutoRandom", true
+		return "AutoRandom", true
 	default:
 		return "", false
 	}
