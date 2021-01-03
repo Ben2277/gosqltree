@@ -22,12 +22,12 @@ Options:  -all
         Print SQL element.
   -id
         Print SQL ID.
+  -origin
+        Print the original SQL syntax tree.
   -pretty
         Print pretty JSON.
   -sql string
         SQL text.
-  -tree
-        Print SQL tree.
 ```
 
 
