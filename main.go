@@ -31,10 +31,7 @@ var (
 func usage() {
 	fmt.Fprintf(
 		os.Stderr,
-		`gosqltree version: 1.0.0
-Usage: gosqltree [--sql sqltext] [--all] [--id] [--element] [--origin] [--pretty]
-		
-Options:`)
+		"gosqltree version: 1.0.0\nUsage: gosqltree [--sql sqltext] [--all] [--id] [--element] [--origin] [--pretty]\n\nOptions:\n")
 	flag.PrintDefaults()
 }
 
