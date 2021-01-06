@@ -1,8 +1,3 @@
-/*
-依赖TiDB的SQL Parser进行SQL语法解析，功能如下：
-1.打印MySQL语法树 - 原生
-2.打印MySQL语法树 - 美化
-*/
 package main
 
 import (
@@ -57,23 +52,6 @@ func init() {
 
 // main
 func main() {
-	// 命令行参数解析
-	// sql := flag.String("sql", "", "SQL text.")
-	// all := flag.Bool("all", false, "Print ALL.")
-	// pretty := flag.Bool("pretty", false, "Print pretty JSON.")
-	// id := flag.Bool("id", false, "Print SQL ID.")
-	// element := flag.Bool("element", false, "Print SQL element.")
-	// origin := flag.Bool("origin", false, "Print Original SQL tree.")
-	// flag.Usage = usage // 自定义Usage
-	// flag.Parse()
-	//
-	// f := new(flags)
-	// f.all = all
-	// f.pretty = pretty
-	// f.id = id
-	// f.element = element
-	// f.origin = origin
-
 	flag.Usage = usage // 自定义Usage
 	flag.Parse()
 
@@ -98,12 +76,10 @@ func main() {
 		/*
 			tree, err := json.Marshal(stmtNode)
 			tree, err := json.MarshalIndent(stmtNode, "", "    ")
-			tree, err := jsonMarshalIndent(stmtNode, "", "    ")
 			if err != nil {
 			    fmt.Println(err.Error())
 			}
 			fmt.Println(string(tree))
-			fmt.Println("=========================================================================================")
 		*/
 
 		// 根据flag解析stmtNode
