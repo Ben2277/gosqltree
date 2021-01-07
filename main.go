@@ -16,6 +16,7 @@ type flags struct {
 	id      bool
 	element bool
 	origin  bool
+	version bool
 }
 
 var (
@@ -25,7 +26,11 @@ var (
 	id      bool
 	element bool
 	origin  bool
+	version bool
 )
+
+// 版本
+var version_text string = "v1.0.1"
 
 // usage 自定义usage信息
 func usage() {
@@ -42,6 +47,7 @@ func init() {
 	flag.BoolVar(&id, "id", false, "Print SQL ID.")
 	flag.BoolVar(&element, "element", false, "Print SQL element.")
 	flag.BoolVar(&origin, "origin", false, "Print the original SQL syntax tree.")
+	flag.BoolVar(&version, "version", false, "Print gosqltree version.")
 
 	// 改变默认的 Usage
 	flag.Usage = usage
@@ -58,51 +64,56 @@ func main() {
 	f.id = id
 	f.element = element
 	f.origin = origin
+	f.version = version
 
 	// 初始化Session
 	s := new(session.Session) // 等价于var s *Session = new(Session)
 
-	// 解析SQL
-	stmtNodes, err := utils.ParseSQL(sql, "", "")
-	if err != nil {
-		fmt.Printf("parse error: %v\n", err.Error())
-		return
-	}
-
-	for _, stmtNode := range stmtNodes {
-		/*
-			tree, err := json.Marshal(stmtNode)
-			tree, err := json.MarshalIndent(stmtNode, "", "    ")
-			if err != nil {
-			    fmt.Println(err.Error())
-			}
-			fmt.Println(string(tree))
-		*/
-
-		// 根据flag解析stmtNode
-		s.GetResult(stmtNode)
-
-		// 根据flag输出结果
-		switch {
-		case f.all == false:
-			if f.id == false && f.element == false && f.origin == false {
-				fmt.Printf("%s", utils.PrintResult(s.SQLTree, f.pretty))
-			} else {
-				if f.id == true {
-					fmt.Printf("%s", utils.PrintResult(s.SQLID, f.pretty))
-				}
-
-				if f.element == true {
-					fmt.Printf("%s", utils.PrintResult(s.SQLElement, f.pretty))
-				}
-
-				if f.origin == true {
-					fmt.Printf("%s", utils.PrintResult(stmtNode, f.pretty))
-				}
-			}
-		case f.all == true:
-			fmt.Printf("%s", utils.PrintResult(s, f.pretty))
-		default:
+	if f.version == false {
+		// 解析SQL
+		stmtNodes, err := utils.ParseSQL(sql, "", "")
+		if err != nil {
+			fmt.Printf("parse error: %v\n", err.Error())
+			return
 		}
+
+		for _, stmtNode := range stmtNodes {
+			/*
+				tree, err := json.Marshal(stmtNode)
+				tree, err := json.MarshalIndent(stmtNode, "", "    ")
+				if err != nil {
+				    fmt.Println(err.Error())
+				}
+				fmt.Println(string(tree))
+			*/
+
+			// 根据flag解析stmtNode
+			s.GetResult(stmtNode)
+
+			// 根据flag输出结果
+			switch {
+			case f.all == false:
+				if f.id == false && f.element == false && f.origin == false {
+					fmt.Printf("%s", utils.PrintResult(s.SQLTree, f.pretty))
+				} else {
+					if f.id == true {
+						fmt.Printf("%s", utils.PrintResult(s.SQLID, f.pretty))
+					}
+
+					if f.element == true {
+						fmt.Printf("%s", utils.PrintResult(s.SQLElement, f.pretty))
+					}
+
+					if f.origin == true {
+						fmt.Printf("%s", utils.PrintResult(stmtNode, f.pretty))
+					}
+				}
+			case f.all == true:
+				fmt.Printf("%s", utils.PrintResult(s, f.pretty))
+			default:
+			}
+		}
+	} else {
+		fmt.Printf("gosqltree Version: %s\n", version_text)
 	}
 }

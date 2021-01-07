@@ -2,23 +2,20 @@
 
 gosqltree基于[TiDB的语法解析器](https://github.com/pingcap/parser)，提供了对于MySQL SQL语句的离线解析，可生成易读的语法树、tidb/parser的原生语法树，或直接获取Schema、Table、Column列表。
 
+&nbsp;
 ### 安装说明
+[二进制免安装](https://github.com/Ben2277/gosqltree/releases)
 
-
-#### 二进制免安装
-
-
-
-
+&nbsp;
 ### 使用说明
-
-
+#### 帮助信息
 ```
 # ./gosqltree --help
-sqltree version: 1.0.0
-Usage: sqltree [--sql sqltext] [--all] [--id] [--element] [--origin] [--pretty]
+gosqltree version: 1.0.0
+Usage: gosqltree [--sql sqltext] [--all] [--id] [--element] [--origin] [--pretty]
 
-Options:  -all
+Options:
+  -all
         Print ALL.
   -element
         Print SQL element.
@@ -30,12 +27,25 @@ Options:  -all
         Print pretty JSON.
   -sql string
         SQL text.
+  -version
+        Print gosqltree version.
 ```
 
-
+&nbsp;
 #### 简单示例
+##### // 打印版本
+```
+# ./gosqltree --version
+gosqltree Version: v1.0.1
+```
 
+##### // 打印SQL中的对象信息
+```
+# ./gosqltree --sql "select an1.c1,an2.c2 from s1.t1 an1 join s2.t2 an2 on an1.c3=an2.c3 where an1.c4='test'" --element
+{"SchemaList":["s1","s2"],"TableList":["t1","t2"],"ColumnList":["c1","c2","c3","c4"],"AsNameList":["an1","an2"]}
+```
 
+##### // 打印create table语句的语法树
 ```
 # ./gosqltree --sql "create table t1 (id int comment 'i am id', name varchar(2) not null) engine=innodb" --pretty
 {
