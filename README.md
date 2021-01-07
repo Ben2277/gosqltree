@@ -158,8 +158,6 @@ gosqltree Version: v1.0.1
 }
 ```
 
-
-#### 致谢
-
-
+&nbsp;
+### 致谢
 - [TiDB](https://github.com/pingcap/tidb)
